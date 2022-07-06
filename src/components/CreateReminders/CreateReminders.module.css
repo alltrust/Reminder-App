@@ -1,0 +1,16 @@
+.priorityField{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.outtermostContainer{
+    width: 35%;
+}
+
+.additionalNotesAndDateContainer{
+    display: flex;
+    flex-direction: column;
+}

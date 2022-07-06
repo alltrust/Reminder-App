@@ -1,0 +1,10 @@
+.reminderDetailsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.reminderDetails{
+    margin: 5px;
+}

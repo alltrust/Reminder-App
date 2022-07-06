@@ -1,0 +1,36 @@
+.searchFormContainer{
+    width: 100%;
+    background-color: rgba(145, 154, 187, 0.637);
+    height: 3rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.searchFormContainer>form{
+    display: flex;
+    padding: 5px;
+}
+.searchFormContainer input{
+    width:50%;
+    background-color: transparent;
+    border:none;
+    border-bottom: 2px solid white
+}
+
+.searchFormContainer button{
+    width: 15%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: black;
+    color: white;
+}
+
+.searchFormContainer button:hover{
+    cursor: pointer;
+}
+
+.searchFormContainer input::placeholder{
+    color: white;
+    font-size: 20px;
+}
