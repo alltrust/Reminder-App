@@ -2,37 +2,36 @@ import React,{ useState } from "react";
 import ContentWrapper from "../../UI/ContentWrapper";
 import style from "./ReminderItem.module.css";
 import ReminderItemDetails from "./ReminderItemDetails";
-import { useDispatch } from "react-redux";
-import { toggleShowModalOn } from "../../store/ui-actions";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleShowModalOn, toggleShowModalOff } from "../../store/ui-actions";
 
-const ReminderItem = ({ name, notes, priority, dueDate }) => {
+const ReminderItem = ({ name, notes, priority, dueDate, hideModalHandler }) => {
   //onshowmodal open the notes that show the main notes as children and a breakdown of the overall details of the reminder.
-  const [showModal, setShowModal] = useState(false);
-//   const dispatch = useDispatch();
+  // const [showModal, setShowModal] = useState(false);
+  const showemModal = useSelector(state=> state.uiActions.showModal)
+  // const dispatch = useDispatch();
+  
 
 
 
-  const showModalHandler = (event) => {
-    setShowModal(true);
-    // const eventIdentifier = event.target.id;
-    // const idValue = eventIdentifier.split("-")[1]
-    // console.log(idValue)
-    // dispatch(toggleShowModalOn(idValue))
-  };
+  // const showModalHandler = (event) => {
+  //   // setShowModal(true);
+  //   const eventIdentifier = event.target.value;
+  //   console.log(eventIdentifier)
+  //   // dispatch(toggleShowModalOn())
+  // };
 
-  const hideModalHandler = () => {
-    setShowModal(false);
-  };
+  //   console.log(showemModal)
+
+  // const hideModalHandler = () => {
+  //   dispatch(toggleShowModalOff())
+  // };
 
   return (
     <>
-      {showModal && (
+      {showemModal && (
         <ReminderItemDetails
           closeModal={hideModalHandler}
-          notes={notes}
-          name={name}
-          priority={priority}
-          dueDate={dueDate}
         />
       )}
       <ContentWrapper >
@@ -42,7 +41,7 @@ const ReminderItem = ({ name, notes, priority, dueDate }) => {
           <p className={style.reminderDetails}>{priority}</p>
         </div>
         <div>
-          <button id={`button-${name}`} onClick={showModalHandler}>Show Details</button>
+          {/* <button id={`button-${name}`} onClick={showModalHandler}>Show Details</button> */}
         </div>
       </ContentWrapper>
     </>

@@ -28,37 +28,31 @@ const reminderSlice = createSlice({
   name: "reminders",
   initialState: {
     reminders: [],
-    completedReminders: [],
     filterInput: null,
-    // searchedReminders: [],
   },
   reducers: {
-    generateReminders: (state, action)=>{
-         state.reminders= action.payload
+    generateReminders: (state, action) => {
+      state.reminders = action.payload;
     },
     addReminder: (state, action) => {
       return { ...state, reminders: [...state.reminders, action.payload] };
-        // state.reminders.push(action.payload)
+      // state.reminders.push(action.payload)
     },
     removeReminder: (state, action) => {
-      const checkedReminder = state.reminders.filter(
+      const completedReminder = state.reminders.findIndex(
         (reminderItem) => reminderItem.id === action.payload.id
       );
-      return {
-        ...state,
-        reminders: state.reminders.filter(
-          (reminderItem) => reminderItem.id !== action.payload.id
-        ),
-        completedReminders: state.completedReminders.concat(checkedReminder),
-      };
+
+      state.reminders[completedReminder].completionStatus = true;
     },
-    reminderFilter: (state, action)=>{
-       state.filterInput = action.payload
-    }
+
+    reminderFilter: (state, action) => {
+      state.filterInput = action.payload;
+    },
     // searchReminders: (state, action) => {
-    
-        //  state.searchedReminders= action.payload
-        
+
+    //  state.searchedReminders= action.payload
+
     //   return {
     //     ...state,
     //     searchedReminders: [...state.reminders].filter((reminderItem) => {
@@ -75,7 +69,7 @@ export const {
   addReminder,
   removeReminder,
   reminderFilter,
-  generateReminders
+  generateReminders,
 } = reminderSlice.actions;
 
 export default reminderSlice.reducer;

@@ -1,40 +1,11 @@
 import { generateReminders } from "./reminders";
-// import { setNotification } from "./modalAction";
 
-// const useSemiPersisantState = (key, initValue) => {
-//     const isMounted = useRef(false);
-//     const [value, setValue] = useState(localStorage.getItem(key) || initValue);
-//     useEffect(() => {
-//       if (!isMounted.current) {
-//         isMounted.current = true;
-//       } else {
-//         localStorage.setItem(key, value);
-//       }
-//     }, [value, key]);
-//     return [value, setValue];
-//   };
-
-// export const fetchRemindersData = ()=>{
-//     const [searchInput, setSearchInput] = useSemiPersisantState("search", "");
-// c;
-
-//   const [url, setUrl] = useState(`${API_ENDPOINT}${query}`);
-
-//   const dispatch = useDispatch();
-//     return async (dispatch) =>{
-//         const fetchData = await fetch(url)
-//     }
-// }
 const API_ENDPOINT =
   "https://reminder-data-9b1ac-default-rtdb.firebaseio.com/reminders.json";
 
 export const getReminderData = () => {
   return async (dispatch) => {
     const fetchData = async () => {
-    //   const query =
-    //     searchInput.length === 0
-    //       ? ""
-    //       : `?orderBy="name"&equalTo="${searchInput}"`;
       const response = await fetch(
         `https://reminder-data-9b1ac-default-rtdb.firebaseio.com/reminders.json`
       );

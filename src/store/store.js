@@ -5,7 +5,7 @@ import ReminderReducer from './reminders'
 
 const store = configureStore({
     reducer:{
-        showModal: ModalReducer,
+        uiActions: ModalReducer,
         configureReminder: ReminderReducer,
     }
 });

@@ -3,17 +3,27 @@ import { createSlice } from "@reduxjs/toolkit";
 const modalSlice = createSlice({
   name: "modal",
   initialState: {
-    showModal: false,
+    showModal: null,
     setNotification: null,
   },
   reducers: {
     toggleShowModalOn: (state, action) => {
-      if (action.payload) {
-        state.showModal = true;
-      }
+      const { name, notes, priority, dueDate } = action.payload;
+      return {
+        ...state,
+        showModal: {
+          name: name,
+          notes: notes,
+          priority: priority,
+          dueDate: dueDate,
+        },
+      };
     },
     toggleShowModalOff: (state, action) => {
-      state.showModal = false;
+      return {
+        ...state,
+        showModal: null,
+      };
     },
     setNotification: (state, action) => {
       state.setNotification = {

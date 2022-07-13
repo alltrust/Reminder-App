@@ -48,6 +48,7 @@ const CreateReminders = () => {
         notes: reminderNotes,
         dueDate: reminderDueDate,
         currentDate: today,
+        completionStatus: false
     }
     // onCreateReminderHandler(reminderData)
     dispatch(addReminder(reminderData));

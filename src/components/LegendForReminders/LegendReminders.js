@@ -8,18 +8,26 @@ import style from "./LegendReminders.module.css";
 const LegendReminders = () => {
   // const showModal = useSelector((state)=> state.showModal.showModal)
   const reminderData = useSelector((state)=> state.configureReminder.reminders)
-  const completedReminders = useSelector((state)=> state.configureReminder.completedReminders)
   const lowPriorityArray = [];
   const moderatePriorityArray = [];
   const highPriorityArray = [];
 
+  const completedReminders = []
+
   for (let reminder in reminderData) {
-    if (reminderData[reminder].priority === "medium") {
-      moderatePriorityArray.push(reminderData[reminder]);
-    } else if (reminderData[reminder].priority === "high") {
-      highPriorityArray.push(reminderData[reminder]);
-    } else {
-      lowPriorityArray.push(reminderData[reminder]);
+    const rItem= reminderData[reminder]
+    if (rItem.priority === "medium" && rItem.completionStatus=== false) {
+      moderatePriorityArray.push(rItem);
+    } else if (rItem.priority === "high" &&rItem.completionStatus=== false) {
+      highPriorityArray.push(rItem);
+    } else if((rItem.priority === "low" || '') && rItem.completionStatus===false) {
+      lowPriorityArray.push(rItem);
+    }
+  };
+
+  for(let reminder in reminderData){
+    if(reminderData[reminder].completionStatus === true){
+      completedReminders.push(reminderData[reminder])
     }
   }
 
