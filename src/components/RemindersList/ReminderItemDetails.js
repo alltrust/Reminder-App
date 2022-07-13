@@ -12,6 +12,7 @@ const ReminderItemDetails = ({
 }) => {
   return (
     <ModalWithOverlay
+    id={`modal-${name}`}
       className={styles.detailsContentContainer}
       closeModal={closeModal}
     >

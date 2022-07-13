@@ -1,10 +1,14 @@
-import React  from 'react';
+import React from "react";
 import ContentWrapper from "../../UI/ContentWrapper";
 import CompletedReminders from "./CompletedReminder";
+import { useSelector } from "react-redux";
 
-import style from './LegendReminders.module.css'
+import style from "./LegendReminders.module.css";
 
-const LegendReminders = ({ reminderData, completedReminders }) => {
+const LegendReminders = () => {
+  // const showModal = useSelector((state)=> state.showModal.showModal)
+  const reminderData = useSelector((state)=> state.configureReminder.reminders)
+  const completedReminders = useSelector((state)=> state.configureReminder.completedReminders)
   const lowPriorityArray = [];
   const moderatePriorityArray = [];
   const highPriorityArray = [];
@@ -18,7 +22,10 @@ const LegendReminders = ({ reminderData, completedReminders }) => {
       lowPriorityArray.push(reminderData[reminder]);
     }
   }
-  
+
+  const totalCompleted = (
+    <p>Total Completed Reminders: {completedReminders.length}</p>
+  );
 
   return (
     <ContentWrapper className={style.legendContainer}>
@@ -34,7 +41,8 @@ const LegendReminders = ({ reminderData, completedReminders }) => {
         <h3>High</h3>
       </div>
       <h2>{highPriorityArray.length}</h2>
-      <CompletedReminders completedReminders={completedReminders}/>
+      {totalCompleted}
+      <CompletedReminders completedReminders={completedReminders} />
     </ContentWrapper>
   );
 };

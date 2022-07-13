@@ -7,14 +7,14 @@ import style from "./AllRemindersContent.module.css";
 
 
 
-const AllReminderContent = ({reminderData, onCreateReminderHandler, filteredReminderData, onRemoveReminderHandler, completedReminders}) => {
+const AllReminderContent = () => {
     
 
   return (
     <div className={style.remindersContentContainer}>
-      <CreateReminders onCreateReminderHandler={onCreateReminderHandler} />
-      <ReminderList reminderData={filteredReminderData} onRemoveReminderHandler={onRemoveReminderHandler}/>
-      <LegendReminders reminderData={reminderData} completedReminders={completedReminders}/>
+      <CreateReminders  />
+      <ReminderList  />
+      <LegendReminders />
     </div>
   );
 };

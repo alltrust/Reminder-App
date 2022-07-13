@@ -1,10 +1,17 @@
 import React,{ useState, useRef } from "react";
 import ContentWrapper from "../../UI/ContentWrapper";
 
+import { addReminder } from "../../store/reminders";
+import { useDispatch } from "react-redux";
+
 import style from "./CreateReminders.module.css";
 
-const CreateReminders = ({onCreateReminderHandler}) => {
+const CreateReminders = () => {
   const [reminderPriority, setReminderPriority] = useState("");
+  const dispatch = useDispatch();
+  
+
+
   const nameInputRef = useRef();
   const dateInputRef = useRef();
   const notesRef = useRef();
@@ -34,12 +41,6 @@ const CreateReminders = ({onCreateReminderHandler}) => {
     today = yyyy + "-" + mm + "-" + dd;
 
     //post data to database
-    console.log(today);
-    console.log(reminderDueDate);
-    console.log(reminderPriority);
-    console.log(reminderName);
-    console.log(reminderNotes);
-
     const reminderData={
         id: reminderName,
         name:reminderName,
@@ -47,9 +48,9 @@ const CreateReminders = ({onCreateReminderHandler}) => {
         notes: reminderNotes,
         dueDate: reminderDueDate,
         currentDate: today,
-        
     }
-    onCreateReminderHandler(reminderData)
+    // onCreateReminderHandler(reminderData)
+    dispatch(addReminder(reminderData));
   };
 
   return (

@@ -5,15 +5,15 @@ import ContentWrapper from "./ContentWrapper";
 import styles from "./ModalWithOverlay.module.css";
 
 //include Onclick to open and close modal
-const ModalWithOverlay = ({ children, closeModal }) => {
+const ModalWithOverlay = ({ children, closeModal, id }) => {
 
   const Overlay = () => {
     return <div className={styles.overlay} onClick={closeModal}></div>;
   };
 
-  const Modal = ({ children, className }) => {
+  const Modal = ({ children, className, id }) => {
     return (
-      <ContentWrapper className={`${styles.modal} ${className}`}>
+      <ContentWrapper id={id} className={`${styles.modal} ${className}`}>
         <div>{children}</div>
       </ContentWrapper>
     );
@@ -25,7 +25,7 @@ const ModalWithOverlay = ({ children, closeModal }) => {
         document.getElementById("overlay")
       )}
       {ReactDOM.createPortal(
-        <Modal onClick={closeModal}>{children}</Modal>,
+        <Modal id={id} onClick={closeModal}>{children}</Modal>,
         document.getElementById("modal")
       )}
     </React.Fragment>
