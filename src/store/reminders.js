@@ -7,6 +7,7 @@ const DUMMY_DATA = [
     priority: "high",
     notes: "this is the first reminder in the dummy data",
     dueDate: "2022-10-03",
+    completionStatus: false,
   },
   {
     id: "r2",
@@ -14,6 +15,7 @@ const DUMMY_DATA = [
     priority: "medium",
     notes: "this is the second reminder in the dummy data",
     dueDate: "2022-08-03",
+    completionStatus: false,
   },
   {
     id: "r3",
@@ -21,6 +23,7 @@ const DUMMY_DATA = [
     priority: "medium",
     notes: "this is the second reminder in the dummy data",
     dueDate: "2022-08-03",
+    completionStatus: false,
   },
 ];
 
@@ -29,6 +32,7 @@ const reminderSlice = createSlice({
   initialState: {
     reminders: [],
     filterInput: null,
+    completedReminders: [],
   },
   reducers: {
     generateReminders: (state, action) => {
@@ -36,7 +40,6 @@ const reminderSlice = createSlice({
     },
     addReminder: (state, action) => {
       return { ...state, reminders: [...state.reminders, action.payload] };
-      // state.reminders.push(action.payload)
     },
     removeReminder: (state, action) => {
       const completedReminder = state.reminders.findIndex(
@@ -45,23 +48,9 @@ const reminderSlice = createSlice({
 
       state.reminders[completedReminder].completionStatus = true;
     },
-
     reminderFilter: (state, action) => {
       state.filterInput = action.payload;
     },
-    // searchReminders: (state, action) => {
-
-    //  state.searchedReminders= action.payload
-
-    //   return {
-    //     ...state,
-    //     searchedReminders: [...state.reminders].filter((reminderItem) => {
-    //       return reminderItem.name
-    //         .toLowerCase()
-    //         .includes(action.payload.toLowerCase());
-    //     }),
-    //   };
-    // },
   },
 });
 

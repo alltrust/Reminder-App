@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import ModalReducer from './ui-actions'
+import UiReducer from './ui-actions'
 import ReminderReducer from './reminders'
+import FormReducer from './formControl'
 
 const store = configureStore({
     reducer:{
-        uiActions: ModalReducer,
+        uiActions: UiReducer,
         configureReminder: ReminderReducer,
+        formValidation: FormReducer,
     }
 });
 

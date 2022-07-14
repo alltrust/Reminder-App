@@ -5,6 +5,8 @@ const modalSlice = createSlice({
   initialState: {
     showModal: null,
     setNotification: null,
+    setIsLoading: false,
+    displayListType: true,
   },
   reducers: {
     toggleShowModalOn: (state, action) => {
@@ -19,7 +21,7 @@ const modalSlice = createSlice({
         },
       };
     },
-    toggleShowModalOff: (state, action) => {
+    toggleShowModalOff: (state) => {
       return {
         ...state,
         showModal: null,
@@ -32,6 +34,13 @@ const modalSlice = createSlice({
         title: action.payload.title,
       };
     },
+    toggleRemindersListByStatus: (state) => {
+      state.displayListType = !state.displayListType;
+    },
+    setIsLoading: (state, action) => {
+      state.setIsLoading = action.payload;
+    },
+    
   },
 });
 
@@ -39,6 +48,8 @@ export const {
   toggleShowModalOn,
   toggleShowModalOff,
   setNotification,
+  toggleRemindersListByStatus,
+  setIsLoading,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

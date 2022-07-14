@@ -1,16 +1,30 @@
-.priorityField{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+.priorityField {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-.outtermostContainer{
-    width: 35%;
+.outtermostContainer {
+  width: 35%;
 }
 
-.additionalNotesAndDateContainer{
-    display: flex;
-    flex-direction: column;
+.additionalNotesAndDateContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.invalid input{
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid input:focus{
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+
+.error{
+  color: #b40e0e;
 }

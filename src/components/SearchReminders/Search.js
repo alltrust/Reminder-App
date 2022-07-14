@@ -9,11 +9,12 @@ const Search = () => {
 
   const inputSearchHandler = (event) => {
     setSearchInput(event.target.value);
+    dispatch(reminderFilter(event.target.value))
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    dispatch(reminderFilter(searchInput));
+    // dispatch(reminderFilter(searchInput));
 
     setSearchInput("");
   };
