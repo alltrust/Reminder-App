@@ -1,19 +1,33 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import style from './CompletedReminders.module.css'
+import style from "./CompletedReminders.module.css";
 import ContentWrapper from "../../UI/ContentWrapper";
 
 const CompletedReminders = () => {
-  const reminders = useSelector((state) => state.configureReminder.reminders);
-  let completedReminders = [];
+  const reminderListType = useSelector(
+    (state) => state.uiActions.displayListType
+  );
+  console.log(reminderListType);
 
-  for (let reminder in reminders) {
-    if (reminders[reminder].completionStatus === true) {
-      completedReminders.push(reminders[reminder]);
+  const completedReminders = useSelector((state) => {
+    const filter = state.configureReminder.filterInput;
+    const completedReminder = state.configureReminder.reminders.filter(
+      (item) => item.completionStatus === true
+    );
+    if (reminderListType === false) {
+      if (filter === null || filter === "") {
+        return completedReminder;
+      } else {
+        return completedReminder.filter((item) =>
+          item.name.toLowerCase().includes(filter)
+        );
+      }
     }
-  }
+  });
+
   console.log(completedReminders);
+  console.log(reminderListType);
   return (
     <ContentWrapper className={style.reminderItemsWrapper}>
       {completedReminders.length !== 0 || completedReminders !== null

@@ -1,16 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import UiReducer from './ui-actions'
-import ReminderReducer from './reminders'
-import FormReducer from './formControl'
+import UiReducer from "./ui-actions";
+import ReminderReducer from "./reminders";
 
 const store = configureStore({
-    reducer:{
-        uiActions: UiReducer,
-        configureReminder: ReminderReducer,
-        formValidation: FormReducer,
-    }
+  reducer: {
+    uiActions: UiReducer,
+    configureReminder: ReminderReducer,
+  },
 });
 
-export default store
-
+export default store;

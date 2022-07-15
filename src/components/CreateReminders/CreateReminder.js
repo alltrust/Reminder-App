@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import ContentWrapper from "../../UI/ContentWrapper";
 
 import { addReminder } from "../../store/reminders";
-import { isReminderNameValid, isDateValid } from "../../store/formControl";
 import { useDispatch, useSelector } from "react-redux";
 import useValidateInput from "../../hooks/use-validateInput";
 
@@ -10,13 +9,13 @@ import style from "./CreateReminders.module.css";
 
 const CreateReminders = () => {
   const [reminderPriority, setReminderPriority] = useState("");
-  const reminderNameValid = useSelector(
-    (state) => state.formValidation.reminderIsValid
-  );
+
   const dispatch = useDispatch();
   const nameInputRef = useRef();
   const dateInputRef = useRef();
   const notesRef = useRef();
+
+  const reminderNameHandler = (reminderName) => reminderName.trim() !== "";
 
   const {
     value: reminderValue,
@@ -25,8 +24,9 @@ const CreateReminders = () => {
     userInputHandler: reminderInputHandler,
     onBlurHandler: reminderBlurHandler,
     resetHandler: reminderResetHandler,
-  } = useValidateInput((reminderName) => reminderName.trim() !== "");
+  } = useValidateInput(reminderNameHandler);
 
+  const reminderDateHandler = (reminderDate) => reminderDate !== "";
   const {
     value: dateValue,
     input: dateInput,
@@ -34,9 +34,7 @@ const CreateReminders = () => {
     userInputHandler: dateInputHandler,
     onBlurHandler: dateBlurHandler,
     resetHandler: dateResetHandler,
-  } = useValidateInput((reminderDate) => reminderDate !== "");
-
-  console.log(reminderNameValid);
+  } = useValidateInput(reminderDateHandler);
 
   let formisValid = false;
   let showFormErrorMsg = false;
@@ -56,11 +54,6 @@ const CreateReminders = () => {
   const priorityMeterHandlerLow = () => {
     setReminderPriority("low");
   };
-
-  // const reminderNameHandler = (event) => {
-  //   dispatch(isReminderNameValid(event.target.value));
-  //   console.log(event.target.value);
-  // };
 
   const submitFormHandler = (event) => {
     event.preventDefault();

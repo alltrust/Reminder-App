@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import { useReducer } from "react";
 
 const inputReducer = (state, action) => {
   switch (action.type) {
@@ -11,13 +11,13 @@ const inputReducer = (state, action) => {
   }
 };
 
-const UseValidateInput = (validatedValue) => {
+const UseValidateInput = (validateValue) => {
   const [inputState, dispatchInputState] = useReducer(inputReducer, {
     value: "",
     isTouched:false ,
   });
 
-  const input = validatedValue(inputState.value);
+  const input = validateValue(inputState.value);
   const invalidInput = !input && inputState.isTouched;
 
 

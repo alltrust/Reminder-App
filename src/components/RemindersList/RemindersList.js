@@ -10,6 +10,9 @@ import style from "./ReminderList.module.css";
 
 const ReminderList = () => {
   const isLoading = useSelector((state) => state.uiActions.setIsLoading);
+  const reminderListType = useSelector(
+    (state) => state.uiActions.displayListType
+  );
 
   const dispatch = useDispatch();
 
@@ -30,10 +33,14 @@ const ReminderList = () => {
     const allReminders = state.configureReminder.reminders.filter(
       (item) => item.completionStatus !== true
     );
-    if (filter === null || filter === "") {
-      return allReminders;
-    } else {
-      return allReminders.filter((reminder) => reminder.name.includes(filter));
+    if (reminderListType === true) {
+      if (filter === null || filter === "") {
+        return allReminders;
+      } else {
+        return allReminders.filter((reminder) =>
+          reminder.name.toLowerCase().includes(filter)
+        );
+      }
     }
   });
 

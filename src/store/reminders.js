@@ -32,7 +32,6 @@ const reminderSlice = createSlice({
   initialState: {
     reminders: [],
     filterInput: null,
-    completedReminders: [],
   },
   reducers: {
     generateReminders: (state, action) => {
