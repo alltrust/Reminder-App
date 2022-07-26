@@ -40,7 +40,7 @@ const reminderSlice = createSlice({
     addReminder: (state, action) => {
       return { ...state, reminders: [...state.reminders, action.payload] };
     },
-    removeReminder: (state, action) => {
+    completeReminder: (state, action) => {
       const completedReminder = state.reminders.findIndex(
         (reminderItem) => reminderItem.id === action.payload.id
       );
@@ -55,7 +55,7 @@ const reminderSlice = createSlice({
 
 export const {
   addReminder,
-  removeReminder,
+  completeReminder,
   reminderFilter,
   generateReminders,
 } = reminderSlice.actions;

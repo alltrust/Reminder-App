@@ -3,7 +3,7 @@ import ContentWrapper from "../../UI/ContentWrapper";
 import ReminderItem from "./ReminderItem";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleShowModalOn, toggleShowModalOff } from "../../store/ui-actions";
-import { removeReminder } from "../../store/reminders";
+import { completeReminder } from "../../store/reminders";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
 import style from "./ReminderList.module.css";
@@ -24,8 +24,8 @@ const ReminderList = () => {
     dispatch(toggleShowModalOff());
   };
 
-  const removeReminderHandler = (item) => {
-    dispatch(removeReminder(item));
+  const completeReminderHandler = (item) => {
+    dispatch(completeReminder(item));
     console.log(item.id);
   };
   const remindersArray = useSelector((state) => {
@@ -63,7 +63,7 @@ const ReminderList = () => {
               completionStatus={item.completionStatus}
               hideModalHandler={hideModalHandler}
             />
-            <button onClick={removeReminderHandler.bind(null, item)}>
+            <button onClick={completeReminderHandler.bind(null, item)}>
               REMOVE REMINDER
             </button>
             <button onClick={showModalHandler.bind(null, item)}>
