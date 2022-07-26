@@ -9,7 +9,7 @@ import LoadingSpinner from "../../UI/LoadingSpinner";
 import style from "./ReminderList.module.css";
 
 const ReminderList = () => {
-  const isLoading = useSelector((state) => state.uiActions.setIsLoading);
+  const isLoading = useSelector((state) => state.uiActions.isLoading);
   const reminderListType = useSelector(
     (state) => state.uiActions.displayListType
   );

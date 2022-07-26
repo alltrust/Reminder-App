@@ -5,7 +5,7 @@ const modalSlice = createSlice({
   initialState: {
     showModal: null,
     setNotification: null,
-    setIsLoading: false,
+    isLoading: false,
     displayListType: true,
   },
   reducers: {
@@ -38,7 +38,7 @@ const modalSlice = createSlice({
       state.displayListType = !state.displayListType;
     },
     setIsLoading: (state, action) => {
-      state.setIsLoading = action.payload;
+      state.isLoading = action.payload;
     },
     
   },
