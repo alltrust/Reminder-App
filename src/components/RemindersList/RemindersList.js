@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleShowModalOn, toggleShowModalOff } from "../../store/ui-actions";
 import { removeReminder } from "../../store/reminders";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import Statuses from "../../store/completionStatus";
 
 import style from "./ReminderList.module.css";
 
@@ -31,7 +32,7 @@ const ReminderList = () => {
   const remindersArray = useSelector((state) => {
     const filter = state.configureReminder.filterInput;
     const allReminders = state.configureReminder.reminders.filter(
-      (item) => item.completionStatus !== true
+      (item) => item.isCompleted !== Statuses.COMPLETE
     );
     if (reminderListType === true) {
       if (filter === null || filter === "") {
@@ -60,7 +61,7 @@ const ReminderList = () => {
               priority={item.priority}
               notes={item.notes}
               dueDate={item.dueDate}
-              completionStatus={item.completionStatus}
+              isCompleted={item.isCompleted}
               hideModalHandler={hideModalHandler}
             />
             <button onClick={removeReminderHandler.bind(null, item)}>
