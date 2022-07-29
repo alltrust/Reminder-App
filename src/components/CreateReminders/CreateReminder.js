@@ -49,7 +49,7 @@ const CreateReminders = () => {
   let formisValid = false;
   let showFormErrorMsg = false;
 
-  if (reminderInput && dateInput) {
+  if (reminderInput && dateInput && notesInput) {
     formisValid = true;
   }
 
