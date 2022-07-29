@@ -2,6 +2,7 @@ import React from "react";
 import ContentWrapper from "../../UI/ContentWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleRemindersListByStatus } from "../../store/ui-actions";
+import Statuses from "../../store/completionStatus";
 
 import style from "./LegendReminders.module.css";
 
@@ -22,20 +23,20 @@ const LegendReminders = () => {
 
   for (let reminder in reminderData) {
     const rItem = reminderData[reminder];
-    if (rItem.priority === "medium" && rItem.completionStatus === false) {
+    if (rItem.priority === "medium" && rItem.isCompleted === Statuses.INCOMPLETE) {
       moderatePriorityArray.push(rItem);
-    } else if (rItem.priority === "high" && rItem.completionStatus === false) {
+    } else if (rItem.priority === "high" && rItem.isCompleted === Statuses.INCOMPLETE) {
       highPriorityArray.push(rItem);
     } else if (
       (rItem.priority === "low" || rItem.priority==="") &&
-      rItem.completionStatus === false
+      rItem.isCompleted === Statuses.INCOMPLETE
     ) {
       lowPriorityArray.push(rItem);
     }
   }
 
   for (let reminder in reminderData) {
-    if (reminderData[reminder].completionStatus === true) {
+    if (reminderData[reminder].isCompleted === Statuses.COMPLETE) {
       remindersCompleted.push(reminderData[reminder]);
     }
   }

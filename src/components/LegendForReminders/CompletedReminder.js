@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import style from "./CompletedReminders.module.css";
 import ContentWrapper from "../../UI/ContentWrapper";
+import Statuses from "../../store/completionStatus";
 
 const CompletedReminders = () => {
   const reminderListType = useSelector(
@@ -13,7 +14,7 @@ const CompletedReminders = () => {
   const completedReminders = useSelector((state) => {
     const filter = state.configureReminder.filterInput;
     const completedReminder = state.configureReminder.reminders.filter(
-      (item) => item.completionStatus === true
+      (item) => item.isCompleted === Statuses.COMPLETE
     );
     if (reminderListType === false) {
       if (filter === null || filter === "") {
@@ -26,8 +27,6 @@ const CompletedReminders = () => {
     }
   });
 
-  console.log(completedReminders);
-  console.log(reminderListType);
   return (
     <ContentWrapper className={style.reminderItemsWrapper}>
       {completedReminders.length !== 0 || completedReminders !== null

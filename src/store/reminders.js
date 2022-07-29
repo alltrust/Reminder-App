@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Statuses from "./completionStatus";
 
 const DUMMY_DATA = [
   {
@@ -7,7 +8,7 @@ const DUMMY_DATA = [
     priority: "high",
     notes: "this is the first reminder in the dummy data",
     dueDate: "2022-10-03",
-    completionStatus: false,
+    isCompleted: Statuses.INCOMPLETE,
   },
   {
     id: "r2",
@@ -15,7 +16,7 @@ const DUMMY_DATA = [
     priority: "medium",
     notes: "this is the second reminder in the dummy data",
     dueDate: "2022-08-03",
-    completionStatus: false,
+    isCompleted: Statuses.INCOMPLETE,
   },
   {
     id: "r3",
@@ -23,7 +24,7 @@ const DUMMY_DATA = [
     priority: "medium",
     notes: "this is the second reminder in the dummy data",
     dueDate: "2022-08-03",
-    completionStatus: false,
+    isCompleted: Statuses.INCOMPLETE,
   },
 ];
 
@@ -45,7 +46,7 @@ const reminderSlice = createSlice({
         (reminderItem) => reminderItem.id === action.payload.id
       );
 
-      state.reminders[completedReminder].completionStatus = true;
+      state.reminders[completedReminder].isCompleted = Statuses.COMPLETE;
     },
     reminderFilter: (state, action) => {
       state.filterInput = action.payload;
