@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import ContentWrapper from "../../UI/ContentWrapper";
+import moment from 'moment'
 
 import { addReminder } from "../../store/reminders";
 import { useDispatch} from "react-redux";
@@ -75,19 +76,18 @@ const CreateReminders = () => {
     const reminderName = nameInputRef.current.value;
     const reminderNotes = notesRef.current.value;
 
-    let today = new Date();
-    const dd = String(today.getDate()).padStart(2, "0");
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
+    const dueDate = moment(reminderDueDate).format("YYYY MMMM dddd")
+
+    let calendarNow = moment().calendar()
+    console.log(calendarNow)
 
     const reminderData = {
       id: Math.random().toString(),
       name: reminderName,
       priority: reminderPriority,
       notes: reminderNotes,
-      dueDate: reminderDueDate,
-      currentDate: today,
+      dueDate: dueDate,
+      createdAt: calendarNow,
       isCompleted: Statuses.INCOMPLETE,
     };
     dispatch(addReminder(reminderData));
