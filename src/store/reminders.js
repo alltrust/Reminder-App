@@ -10,7 +10,7 @@ const DUMMY_DATA = [
     notes: "this is the first reminder in the dummy data",
     dueDate: "2022-10-03",
     isCompleted: Statuses.INCOMPLETE,
-    priority: Priority.HIGH
+    priority: Priority.HIGH,
   },
   {
     id: "r2",
@@ -19,7 +19,7 @@ const DUMMY_DATA = [
     notes: "this is the second reminder in the dummy data",
     dueDate: "2022-08-03",
     isCompleted: Statuses.INCOMPLETE,
-    priority: Priority.LOW
+    priority: Priority.LOW,
   },
   {
     id: "r3",
@@ -28,7 +28,7 @@ const DUMMY_DATA = [
     notes: "this is the second reminder in the dummy data",
     dueDate: "2022-08-03",
     isCompleted: Statuses.INCOMPLETE,
-    priority:Priority.MEDIUM
+    priority: Priority.MEDIUM,
   },
 ];
 
@@ -45,12 +45,18 @@ const reminderSlice = createSlice({
     addReminder: (state, action) => {
       return { ...state, reminders: [...state.reminders, action.payload] };
     },
-    removeReminder: (state, action) => {
+    completeReminder: (state, action) => {
       const completedReminder = state.reminders.findIndex(
         (reminderItem) => reminderItem.id === action.payload.id
       );
 
       state.reminders[completedReminder].isCompleted = Statuses.COMPLETE;
+    },
+    deleteReminder: (state, action) => {
+      const remainingReminders = state.reminders.filter((reminderItem)=>
+        reminderItem.id !== action.payload.id
+      )
+      return { ...state, reminders: remainingReminders}
     },
     reminderFilter: (state, action) => {
       state.filterInput = action.payload;
@@ -60,9 +66,10 @@ const reminderSlice = createSlice({
 
 export const {
   addReminder,
-  removeReminder,
+  completeReminder,
   reminderFilter,
   generateReminders,
+  deleteReminder
 } = reminderSlice.actions;
 
 export default reminderSlice.reducer;
