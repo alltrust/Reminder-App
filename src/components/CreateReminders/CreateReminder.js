@@ -75,11 +75,8 @@ const CreateReminders = () => {
     const reminderDueDate = dateInputRef.current.value;
     const reminderName = nameInputRef.current.value;
     const reminderNotes = notesRef.current.value;
-
-    const dueDate = moment(reminderDueDate).format("YYYY MMMM dddd")
-
-    let calendarNow = moment().calendar()
-    console.log(calendarNow)
+    const dueDate = moment(reminderDueDate).format("MMM Do YY")
+    let now = moment().format("MMM Do YY")
 
     const reminderData = {
       id: Math.random().toString(),
@@ -87,7 +84,7 @@ const CreateReminders = () => {
       priority: reminderPriority,
       notes: reminderNotes,
       dueDate: dueDate,
-      createdAt: calendarNow,
+      createdAt: now,
       isCompleted: Statuses.INCOMPLETE,
     };
     dispatch(addReminder(reminderData));
