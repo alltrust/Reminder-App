@@ -10,15 +10,9 @@ const modalSlice = createSlice({
   },
   reducers: {
     toggleShowModalOn: (state, action) => {
-      const { name, notes, priority, dueDate } = action.payload;
       return {
         ...state,
-        showModal: {
-          name: name,
-          notes: notes,
-          priority: priority,
-          dueDate: dueDate,
-        },
+        showModal: action.payload
       };
     },
     toggleShowModalOff: (state) => {
