@@ -61,6 +61,7 @@ const ReminderList = () => {
               priority={item.priority}
               notes={item.notes}
               dueDate={item.dueDate}
+              createdAt ={item.createdAt}
               isCompleted={item.isCompleted}
               hideModalHandler={hideModalHandler}
             />
