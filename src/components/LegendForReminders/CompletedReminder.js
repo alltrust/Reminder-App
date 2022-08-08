@@ -31,8 +31,6 @@ const CompletedReminders = () => {
 
   const deleteReminderHandler = (item)=>{
     dispatch(deleteReminder(item))
-
-
   }
 
   return (

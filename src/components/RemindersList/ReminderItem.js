@@ -5,7 +5,7 @@ import ReminderItemDetails from "./ReminderItemDetails";
 import { useSelector } from "react-redux";
 
 
-const ReminderItem = ({ name, notes, priority, dueDate, hideModalHandler }) => {
+const ReminderItem = ({ name, notes, priority, dueDate, hideModalHandler, editMode }) => {
 
   const showModal = useSelector((state) => state.uiActions.showModal);
  

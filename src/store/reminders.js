@@ -43,7 +43,27 @@ const reminderSlice = createSlice({
       state.reminders = action.payload;
     },
     addReminder: (state, action) => {
-      return { ...state, reminders: [...state.reminders, action.payload] };
+      console.log(action.payload);
+      const reminderIndex = state.reminders.findIndex(
+        (reminder) => reminder.id === action.payload.id
+      );
+      const reminderExists = state.reminders[reminderIndex];
+      console.log(reminderIndex);
+      let updateReminder;
+      let updatedList;
+      if (!reminderExists) {
+        return { ...state, reminders: [...state.reminders, action.payload] };
+      } else {
+        console.log("exists");
+        updatedList = [...state.reminders];
+        updateReminder = {
+          ...reminderExists,
+          notes: action.payload.notes,
+          name: action.payload.name,
+        };
+        updatedList[reminderIndex] = updateReminder;
+      }
+      return { ...state, reminders: updatedList };
     },
     completeReminder: (state, action) => {
       const completedReminder = state.reminders.findIndex(
@@ -53,10 +73,10 @@ const reminderSlice = createSlice({
       state.reminders[completedReminder].isCompleted = Statuses.COMPLETE;
     },
     deleteReminder: (state, action) => {
-      const remainingReminders = state.reminders.filter((reminderItem)=>
-        reminderItem.id !== action.payload.id
-      )
-      return { ...state, reminders: remainingReminders}
+      const remainingReminders = state.reminders.filter(
+        (reminderItem) => reminderItem.id !== action.payload.id
+      );
+      return { ...state, reminders: remainingReminders };
     },
     reminderFilter: (state, action) => {
       state.filterInput = action.payload;
@@ -69,7 +89,7 @@ export const {
   completeReminder,
   reminderFilter,
   generateReminders,
-  deleteReminder
+  deleteReminder,
 } = reminderSlice.actions;
 
 export default reminderSlice.reducer;

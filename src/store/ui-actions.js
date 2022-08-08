@@ -4,6 +4,8 @@ const modalSlice = createSlice({
   name: "modal",
   initialState: {
     showModal: null,
+    isEditMode: false,
+    editIdentifier: null,
     setNotification: null,
     setIsLoading: false,
     displayListType: true,
@@ -12,13 +14,23 @@ const modalSlice = createSlice({
     toggleShowModalOn: (state, action) => {
       return {
         ...state,
-        showModal: action.payload
+        showModal: action.payload,
       };
     },
     toggleShowModalOff: (state) => {
       return {
         ...state,
         showModal: null,
+        isEditMode: false,
+        editIdentifier: null,
+      };
+    },
+    toggleEditMode: (state, action) => {
+      return {
+        ...state,
+        isEditMode: !state.isEditMode,
+        editIdentifier: action.payload,
+        showModal: action.payload,
       };
     },
     setNotification: (state, action) => {
@@ -34,7 +46,6 @@ const modalSlice = createSlice({
     setIsLoading: (state, action) => {
       state.setIsLoading = action.payload;
     },
-    
   },
 });
 
@@ -44,6 +55,7 @@ export const {
   setNotification,
   toggleRemindersListByStatus,
   setIsLoading,
+  toggleEditMode,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

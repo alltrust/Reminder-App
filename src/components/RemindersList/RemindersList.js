@@ -2,7 +2,7 @@ import React from "react";
 import ContentWrapper from "../../UI/ContentWrapper";
 import ReminderItem from "./ReminderItem";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleShowModalOn, toggleShowModalOff } from "../../store/ui-actions";
+import { toggleShowModalOn, toggleShowModalOff, toggleEditMode } from "../../store/ui-actions";
 import { completeReminder } from "../../store/reminders";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import Statuses from "../../store/completionStatus";
@@ -11,11 +11,15 @@ import style from "./ReminderList.module.css";
 
 const ReminderList = () => {
   const isLoading = useSelector((state) => state.uiActions.setIsLoading);
+  const dispatch = useDispatch();
+
   const reminderListType = useSelector(
     (state) => state.uiActions.displayListType
   );
+  const editModeHandler = (item) => {
+    dispatch(toggleEditMode(item));
+  };
 
-  const dispatch = useDispatch();
 
   const showModalHandler = (item) => {
     dispatch(toggleShowModalOn(item));
@@ -65,11 +69,12 @@ const ReminderList = () => {
               hideModalHandler={hideModalHandler}
             />
             <button onClick={completeReminderHandler.bind(null, item)}>
-               REMINDER Completed
+               Complete
             </button>
             <button onClick={showModalHandler.bind(null, item)}>
-              Show Modal
+              Show Details
             </button>
+            <button onClick={editModeHandler.bind(null, item)}>Edit</button>
           </div>
         );
       })}
