@@ -43,23 +43,22 @@ const reminderSlice = createSlice({
       state.reminders = action.payload;
     },
     addReminder: (state, action) => {
-      console.log(action.payload);
       const reminderIndex = state.reminders.findIndex(
         (reminder) => reminder.id === action.payload.id
       );
       const reminderExists = state.reminders[reminderIndex];
-      console.log(reminderIndex);
       let updateReminder;
       let updatedList;
       if (!reminderExists) {
         return { ...state, reminders: [...state.reminders, action.payload] };
       } else {
-        console.log("exists");
         updatedList = [...state.reminders];
         updateReminder = {
           ...reminderExists,
           notes: action.payload.notes,
           name: action.payload.name,
+          priority: action.payload.priority,
+          dueDate: action.payload.dueDate 
         };
         updatedList[reminderIndex] = updateReminder;
       }
