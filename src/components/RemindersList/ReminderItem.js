@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ContentWrapper from "../../UI/ContentWrapper";
 import style from "./ReminderItem.module.css";
 import ReminderItemDetails from "./ReminderItemDetails";

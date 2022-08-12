@@ -31,7 +31,6 @@ const ReminderList = () => {
 
   const completeReminderHandler = (item) => {
     dispatch(completeReminder(item));
-    console.log(item.id);
   };
   const remindersArray = useSelector((state) => {
     const filter = state.configureReminder.filterInput;

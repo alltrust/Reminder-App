@@ -5,7 +5,7 @@ const modalSlice = createSlice({
   initialState: {
     showModal: null,
     isEditMode: false,
-    editIdentifier: null,
+    editIdentifierContent: null,
     setNotification: null,
     setIsLoading: false,
     displayListType: true,
@@ -22,14 +22,15 @@ const modalSlice = createSlice({
         ...state,
         showModal: null,
         isEditMode: false,
-        editIdentifier: null,
+        editIdentifierContent: null,
       };
     },
     toggleEditMode: (state, action) => {
+
       return {
         ...state,
         isEditMode: !state.isEditMode,
-        editIdentifier: action.payload,
+        editIdentifierContent: action.payload,
         showModal: action.payload,
       };
     },
