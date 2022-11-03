@@ -1,11 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {deleteReminder} from '../../store/reminders'
 
 import style from "./CompletedReminders.module.css";
 import ContentWrapper from "../../UI/ContentWrapper";
 import Statuses from "../../store/completionStatus";
 
 const CompletedReminders = () => {
+  const dispatch = useDispatch()
   const reminderListType = useSelector(
     (state) => state.uiActions.displayListType
   );
@@ -27,6 +29,10 @@ const CompletedReminders = () => {
     }
   });
 
+  const deleteReminderHandler = (item)=>{
+    dispatch(deleteReminder(item))
+  }
+
   return (
     <ContentWrapper className={style.reminderItemsWrapper}>
       {completedReminders.length !== 0 || completedReminders !== null
@@ -38,6 +44,7 @@ const CompletedReminders = () => {
                   <p>{item.dueDate}</p>
                   <p>dateOfCompletion</p>
                 </div>
+                <button onClick={deleteReminderHandler.bind(null, item)}>Delete forever</button>
               </ContentWrapper>
             );
           })
