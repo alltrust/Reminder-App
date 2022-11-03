@@ -18,7 +18,6 @@ function App() {
     dispatch(getReminderData());
   }, [dispatch]);
 
-  console.log(reminders)
 
   useEffect(() => {
     if (isInitialLoad) {

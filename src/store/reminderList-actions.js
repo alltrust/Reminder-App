@@ -9,7 +9,7 @@ export const getReminderData = () => {
     const fetchData = async () => {
       dispatch(setIsLoading(true));
       const response = await fetch(
-        `https://reminder-data-9b1ac-default-rtdb.firebaseio.com/reminders.json`
+        "https://reminder-data-9b1ac-default-rtdb.firebaseio.com/reminders.json"
       );
       if (!response.ok) {
         throw new Error("error");
@@ -23,19 +23,13 @@ export const getReminderData = () => {
       const cartData = await fetchData();
       dispatch(generateReminders(cartData));
     } catch (e) {
-      //dispatch errors
-      console.log(e.message);
+      throw new Error(e.message);
     }
     dispatch(setIsLoading(false));
   };
 };
 
 export const sendReminderData = (reminders) => {
-  //   return async (dispatch) => {
-  //dispatch loading
-  //   dispatch(setNotification({
-
-  //   }))
   return async () => {
     const response = await fetch(
       "https://reminder-data-9b1ac-default-rtdb.firebaseio.com/reminders.json",
@@ -47,13 +41,5 @@ export const sendReminderData = (reminders) => {
     if (!response.ok) {
       throw new Error("error message ");
     }
-    //   try {
-    //      await sendData();
-    //     // dispatch(setNotification({}))
-    //   } catch (e) {
-    //     // dispatch(setNotification({}))
-    //     console.log(e.message);
-    //   }
   };
-  //   };
 };

@@ -11,7 +11,6 @@ const CompletedReminders = () => {
   const reminderListType = useSelector(
     (state) => state.uiActions.displayListType
   );
-  console.log(reminderListType);
 
   const completedReminders = useSelector((state) => {
     const filter = state.configureReminder.filterInput;

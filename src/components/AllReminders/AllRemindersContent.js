@@ -11,7 +11,6 @@ const AllReminderContent = () => {
   const reminderListToggle = useSelector(
     (state) => state.uiActions.displayListType
   );
-  console.log(reminderListToggle);
 
   return (
     <div className={style.remindersContentContainer}>

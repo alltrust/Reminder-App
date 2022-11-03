@@ -48,10 +48,6 @@ const ReminderList = () => {
     }
   });
 
-  const filter = useSelector((state) => state.configureReminder.filterInput);
-
-  console.log(filter);
-
   return (
     <ContentWrapper className={style.reminderItemsWrapper}>
       {isLoading && <LoadingSpinner />}
