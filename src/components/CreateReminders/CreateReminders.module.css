@@ -5,6 +5,9 @@
   align-items: center;
   padding: 20px;
 }
+.edit{
+  background-color: rgb(199, 128, 187);
+}
 
 .outtermostContainer {
   width: 35%;

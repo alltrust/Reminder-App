@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Statuses from "./completionStatus";
+import Priority from "./priorityStatus";
 
 const DUMMY_DATA = [
   {
@@ -7,7 +9,8 @@ const DUMMY_DATA = [
     priority: "high",
     notes: "this is the first reminder in the dummy data",
     dueDate: "2022-10-03",
-    completionStatus: false,
+    isCompleted: Statuses.INCOMPLETE,
+    priority: Priority.HIGH,
   },
   {
     id: "r2",
@@ -15,7 +18,8 @@ const DUMMY_DATA = [
     priority: "medium",
     notes: "this is the second reminder in the dummy data",
     dueDate: "2022-08-03",
-    completionStatus: false,
+    isCompleted: Statuses.INCOMPLETE,
+    priority: Priority.LOW,
   },
   {
     id: "r3",
@@ -23,14 +27,15 @@ const DUMMY_DATA = [
     priority: "medium",
     notes: "this is the second reminder in the dummy data",
     dueDate: "2022-08-03",
-    completionStatus: false,
+    isCompleted: Statuses.INCOMPLETE,
+    priority: Priority.MEDIUM,
   },
 ];
 
 const reminderSlice = createSlice({
   name: "reminders",
   initialState: {
-    reminders: [],
+    reminders: DUMMY_DATA,
     filterInput: null,
   },
   reducers: {
@@ -38,14 +43,39 @@ const reminderSlice = createSlice({
       state.reminders = action.payload;
     },
     addReminder: (state, action) => {
-      return { ...state, reminders: [...state.reminders, action.payload] };
+      const reminderIndex = state.reminders.findIndex(
+        (reminder) => reminder.id === action.payload.id
+      );
+      const reminderExists = state.reminders[reminderIndex];
+      let updateReminder;
+      let updatedList;
+      if (!reminderExists) {
+        return { ...state, reminders: [...state.reminders, action.payload] };
+      } else {
+        updatedList = [...state.reminders];
+        updateReminder = {
+          ...reminderExists,
+          notes: action.payload.notes,
+          name: action.payload.name,
+          priority: action.payload.priority,
+          dueDate: action.payload.dueDate 
+        };
+        updatedList[reminderIndex] = updateReminder;
+      }
+      return { ...state, reminders: updatedList };
     },
-    removeReminder: (state, action) => {
+    completeReminder: (state, action) => {
       const completedReminder = state.reminders.findIndex(
         (reminderItem) => reminderItem.id === action.payload.id
       );
 
-      state.reminders[completedReminder].completionStatus = true;
+      state.reminders[completedReminder].isCompleted = Statuses.COMPLETE;
+    },
+    deleteReminder: (state, action) => {
+      const remainingReminders = state.reminders.filter(
+        (reminderItem) => reminderItem.id !== action.payload.id
+      );
+      return { ...state, reminders: remainingReminders };
     },
     reminderFilter: (state, action) => {
       state.filterInput = action.payload;
@@ -55,9 +85,10 @@ const reminderSlice = createSlice({
 
 export const {
   addReminder,
-  removeReminder,
+  completeReminder,
   reminderFilter,
   generateReminders,
+  deleteReminder,
 } = reminderSlice.actions;
 
 export default reminderSlice.reducer;

@@ -1,9 +1,12 @@
 import React, { useState, useRef } from "react";
 import ContentWrapper from "../../UI/ContentWrapper";
+import moment from 'moment'
 
 import { addReminder } from "../../store/reminders";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import useValidateInput from "../../hooks/use-validateInput";
+import Statuses from "../../store/completionStatus";
+import Priority from "../../store/priorityStatus";
 
 import style from "./CreateReminders.module.css";
 
@@ -16,7 +19,6 @@ const CreateReminders = () => {
   const notesRef = useRef();
 
   const reminderNameHandler = (reminderName) => reminderName.trim() !== "";
-
   const {
     value: reminderValue,
     input: reminderInput,
@@ -36,55 +38,60 @@ const CreateReminders = () => {
     resetHandler: dateResetHandler,
   } = useValidateInput(reminderDateHandler);
 
+  const reminderNoteHandler = (note)=> note.trim() !== "";
+  const {
+    value: notesValue,
+    input: notesInput,
+    invalidInput: invalidNotesInput,
+    userInputHandler: notesInputHandler,
+    onBlurHandler: notesBlurHandler,
+    resetHandler: notesResetHandler,
+  } = useValidateInput(reminderNoteHandler)
+
   let formisValid = false;
   let showFormErrorMsg = false;
 
-  if (reminderInput && dateInput) {
+  if (reminderInput && dateInput && notesInput) {
     formisValid = true;
   }
 
-  // const [formIsValid, setFormIsValid] = useState(false);
-
   const priorityMeterHandlerHigh = () => {
-    setReminderPriority("high");
+    setReminderPriority(Priority.HIGH);
   };
   const priorityMeterHandlerMedium = () => {
-    setReminderPriority("medium");
+    setReminderPriority(Priority.MEDIUM);
   };
   const priorityMeterHandlerLow = () => {
-    setReminderPriority("low");
+    setReminderPriority(Priority.LOW);
   };
 
   const submitFormHandler = (event) => {
     event.preventDefault();
 
     if (!formisValid) {
-      return (showFormErrorMsg = true);
+      return showFormErrorMsg = true;
     }
 
     const reminderDueDate = dateInputRef.current.value;
     const reminderName = nameInputRef.current.value;
     const reminderNotes = notesRef.current.value;
-
-    let today = new Date();
-    const dd = String(today.getDate()).padStart(2, "0");
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
+    const dueDate = moment(reminderDueDate).format("MMM Do YY")
+    let now = moment().format("MMM Do YY")
 
     const reminderData = {
-      id: reminderName,
+      id: Math.random().toString(),
       name: reminderName,
       priority: reminderPriority,
       notes: reminderNotes,
-      dueDate: reminderDueDate,
-      currentDate: today,
-      completionStatus: false,
+      dueDate: dueDate,
+      createdAt: now,
+      isCompleted: Statuses.INCOMPLETE,
     };
     dispatch(addReminder(reminderData));
 
     dateResetHandler();
     reminderResetHandler();
+    notesResetHandler();
   };
 
   const errorStyleReminder = invalidReminderInput ? style.invalid : "";
@@ -150,10 +157,14 @@ const CreateReminders = () => {
         </fieldset>
         <div className={style.additionalNotesAndDateContainer}>
           <label htmlFor="additional-notes">Additional Notes</label>
+          {invalidNotesInput && (<p className={style.error}> add info please</p>)}
           <textarea
             id="additional-notes"
             className="additional-notes"
             ref={notesRef}
+            value={notesValue}
+            onChange={notesInputHandler}
+            onBlur={notesBlurHandler}
           />
           <div className={errorDateStyle}>
             <label htmlFor="date">DUE DATE</label>

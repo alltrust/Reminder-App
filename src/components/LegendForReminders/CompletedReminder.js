@@ -1,10 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {deleteReminder} from '../../store/reminders'
 
 import style from "./CompletedReminders.module.css";
 import ContentWrapper from "../../UI/ContentWrapper";
+import Statuses from "../../store/completionStatus";
 
 const CompletedReminders = () => {
+  const dispatch = useDispatch()
   const reminderListType = useSelector(
     (state) => state.uiActions.displayListType
   );
@@ -13,7 +16,7 @@ const CompletedReminders = () => {
   const completedReminders = useSelector((state) => {
     const filter = state.configureReminder.filterInput;
     const completedReminder = state.configureReminder.reminders.filter(
-      (item) => item.completionStatus === true
+      (item) => item.isCompleted === Statuses.COMPLETE
     );
     if (reminderListType === false) {
       if (filter === null || filter === "") {
@@ -26,8 +29,10 @@ const CompletedReminders = () => {
     }
   });
 
-  console.log(completedReminders);
-  console.log(reminderListType);
+  const deleteReminderHandler = (item)=>{
+    dispatch(deleteReminder(item))
+  }
+
   return (
     <ContentWrapper className={style.reminderItemsWrapper}>
       {completedReminders.length !== 0 || completedReminders !== null
@@ -39,6 +44,7 @@ const CompletedReminders = () => {
                   <p>{item.dueDate}</p>
                   <p>dateOfCompletion</p>
                 </div>
+                <button onClick={deleteReminderHandler.bind(null, item)}>Delete forever</button>
               </ContentWrapper>
             );
           })
