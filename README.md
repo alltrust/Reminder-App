@@ -3,7 +3,7 @@
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> Create, update, delete and complete all your reminders in one place.
+> Create, update, delete, and complete all your reminders!
 
 ## Install
 
@@ -29,7 +29,7 @@ npm run test
 
 * Website: argarcia.dev
 * Github: [@alltrust](https://github.com/alltrust)
-* LinkedIn: [@Aldo Garcia](https://linkedin.com/in/Aldo Garcia)
+* LinkedIn: [@aldo-garcia-rene](https://linkedin.com/in/aldo-garcia-rene)
 
 ## Show your support
 
